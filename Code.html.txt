@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <title> Lucky Birthday </title>
+  <meta name="viewport" content="width=device-width"/>
+  <style>
+    #button1 {
+      background-color: yellow;
+      padding: 10px;
+      margin: 20px;
+     border-radius: 10px;
+    }
+    #button1:hover {
+      color: white;
+      background-color: black;
+    }
+    body {
+      background-color: #effaf6;
+    }
+    #pic, #pic1 {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <form id="bdayform"> 
+      <h2 style="color:blue; text-align:center;">Lucky Birthday</h2>
+      <label for="userbday"> Your Birthday: </label>
+      <input type="date" id="userbday" name="bday" required> <br>
+      <label for="luckynum"> Lucky Number: </label>
+      <input type="number" id="luckynum" name="luckynum" required > <br>
+      <button type="submit" id="button1">Check</button>
+      <img id="pic" src="" alt="Celebration GIF" width="300" height="auto">
+      <img id="pic1" src="" alt="Unlucky GIF" width="300" height="auto">
+    </form>
+    <p id="message"></p>
+  </div>
+  <script>
+    document.getElementById("bdayform").onsubmit = function(event) { 
+      event.preventDefault(); 
+
+      const selectDate = document.getElementById("userbday").value;
+      const date1 = selectDate.replaceAll("-", "");
+      const myArray = date1.split("");
+      let sum = 0;
+      
+      for (let i = 0; i < myArray.length; i++) {
+        sum += parseInt(myArray[i]);
+      }
+      
+      const num1 = document.getElementById("luckynum").value;
+      const gif = document.getElementById("pic");
+      const gif1 = document.getElementById("pic1");
+
+      gif.style.display = "none";
+      gif1.style.display = "none";
+
+      if (num1 == sum) {
+
+        document.getElementById("message").innerHTML="Your Birthday is lucky!";
+        gif.src = "https://media1.tenor.com/m/UW6uct73SaoAAAAC/confetti-party.gif";
+        gif.style.display = "block"; 
+      } else {
+        document.getElementById("message").innerHTML="Your Birthday is not lucky!";
+        gif1.src = "https://i.pinimg.com/originals/d7/f5/87/d7f587da442a54025daf47091fe26ba0.gif";
+        gif1.style.display = "block"; 
+      }
+    };
+  </script>
+</body>
+</html>
